@@ -37,7 +37,7 @@
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import React from "react";
 import LeftSidebar from "./LeftSidebar";
 import Feed from "./Feed";
