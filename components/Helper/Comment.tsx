@@ -1,5 +1,5 @@
 "use client";
-import { Post, User } from "@/types";
+import { Post, User, Comment as CommentType } from "@/types";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
@@ -19,7 +19,7 @@ type Props = {
     post: Post | null;
 };
 
-const Comment = ({ post, user }: Props) => {
+const Comment = ({ post, user }: Props & { post: Post & { comments: (CommentType & { user: User & { username: string } })[] } }) => {
     const [comment, setComment] = useState("");
     const dispatch = useDispatch();
     const addCommentHandler = async (id: string) => {
@@ -116,93 +116,3 @@ const Comment = ({ post, user }: Props) => {
 };
 
 export default Comment;
-
-
-
-// "use client";
-// import { Post, User } from "@/types";
-// import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
-// import Image from "next/image";
-
-// type Props = {
-//     user: User | null;
-//     post: Post | null;
-// };
-
-// const Comment = ({ post, user }: Props) => {
-//     const [comment, setComment] = useState("");
-//     const dispatch = useDispatch();
-
-//     const addCommentHandler = async (id: string) => {
-//         // Comment add karne ka logic yahan aayega
-//     };
-
-//     return (
-//         <div>
-//             <Dialog>
-//                 <DialogTrigger>
-//                     <p className="mt-2 text-sm font-semibold">
-//                         View All {post?.comments.length} Comments
-//                     </p>
-//                 </DialogTrigger>
-                
-//                 {/* MODAL CONTENT */}
-//                 <DialogContent 
-//                     className=" w-[100vw] h-[50vh] flex flex-col sm:flex-row bg-white rounded-lg shadow-lg overflow-hidden"
-//                 >
-//                     {/* LEFT SIDE IMAGE */}
-//                     <div className="sm:w-1/2 hidden max-h-[80vh] sm:block">
-//                         <Image
-//                             src={`${post?.image?.url}`}
-//                             alt="Post Image"
-//                             width={300}
-//                             height={300}
-//                             className="w-full h-full object-cover rounded-l-lg"
-//                         />
-//                     </div>
-
-//                     {/* RIGHT SIDE COMMENTS SECTION */}
-//                     <div className="w-full sm:w-[50%] h-full flex flex-col p-4">
-//                         <DialogTitle className="text-lg font-semibold border-b pb-2">
-//                             Comments
-//                         </DialogTitle>
-                        
-//                         {/* COMMENTS LIST */}
-//                         <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400">
-//                             {post?.comments?.length > 0 ? (
-//                                 post.comments.map((comment, index) => (
-//                                     <p key={index} className="text-sm p-2 border-b">
-//                                         {comment.text}
-//                                     </p>
-//                                 ))
-//                             ) : (
-//                                 <p className="text-gray-500">No comments yet.</p>
-//                             )}
-//                         </div>
-
-//                         {/* COMMENT INPUT */}
-//                         <div className="border-t pt-2 flex items-center">
-//                             <input
-//                                 type="text"
-//                                 placeholder="Add a comment..."
-//                                 className="flex-1 border p-2 rounded-md focus:outline-none"
-//                                 value={comment}
-//                                 onChange={(e) => setComment(e.target.value)}
-//                             />
-//                             <button
-//                                 onClick={() => addCommentHandler(post?._id!)}
-//                                 className="ml-2 text-blue-500 font-semibold"
-//                             >
-//                                 Post
-//                             </button>
-//                         </div>
-//                     </div>
-//                 </DialogContent>
-//             </Dialog>
-//         </div>
-//     );
-// };
-
-// export default Comment;
