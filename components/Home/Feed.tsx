@@ -2,7 +2,6 @@
 "use client";
 
 import { BASE_API_URL } from "@/server";
-import { Post } from "@/types"; // Adjust the path to where the Post type is defined
 import { RootState } from "@/store/store";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -16,6 +15,7 @@ import Image from "next/image";
 import Comment from "../Helper/Comment";
 import { toast } from "sonner";
 import { setAuthUser } from "@/store/authSlice";
+import { Post } from "@/types";
 
 const Feed = () => {
     const dispatch = useDispatch();
